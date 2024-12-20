@@ -9,4 +9,4 @@ edition = "2021"
 clap = { version = "4.0", features = ["derive"] }
 
 [dev-dependencies]
-serial_test = "*"
+serial_test = "3.2.0"
