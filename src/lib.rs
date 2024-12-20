@@ -1,10 +1,20 @@
+//! # Minigrep
+//! `minigrep` is a simple command-line tool written in Rust that searches for a pattern in a file and prints the lines that contain it.
+//! ## Usage
+//! `minigrep <pattern> <file>`
+//! ## Example
+//! `minigrep "pattern" file.txt`
+//! ## Features
+//! - Case-sensitive search
+//! - Case-insensitive search
+//! - Search in a file
+//!
 use std::error::Error;
 use std::fs;
 
 pub mod config;
 
 pub fn run(configuration: &config::Config) -> Result<(), Box<dyn Error>> {
-
     // Read content from file
     let contents: String = fs::read_to_string(&configuration.file_path())?;
 
@@ -24,14 +34,19 @@ pub fn run(configuration: &config::Config) -> Result<(), Box<dyn Error>> {
 }
 
 fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents.lines().filter(|line| line.contains(query)).collect()
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
-    contents.lines().filter(|line| line.to_lowercase().contains(&query)).collect()
+    contents
+        .lines()
+        .filter(|line| line.to_lowercase().contains(&query))
+        .collect()
 }
-
 
 #[cfg(test)]
 mod tests {

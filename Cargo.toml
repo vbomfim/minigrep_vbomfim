@@ -1,6 +1,8 @@
 [package]
-name = "minigrep"
-version = "0.1.0"
+name = "minigrep_vbomfim"
+license = "MIT OR Apache-2.0"
+description = "A simple grep tool written in Rust"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]

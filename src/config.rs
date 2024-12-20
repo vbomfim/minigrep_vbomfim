@@ -62,8 +62,13 @@ mod tests {
     #[serial]
     fn test_build_with_ignore_case_flag() {
         clear_env_var();
-        let config =
-            Config::build_from(&["minigrep", "pattern", "file.txt", "--ignore-case"]).unwrap();
+        let args = vec![
+            "minigrep".to_string(),
+            "pattern".to_string(),
+            "file.txt".to_string(),
+            "--ignore-case".to_string(),
+        ];
+        let config = Config::build_from(args.into_iter()).unwrap();
         assert!(config.ignore_case);
     }
 
@@ -71,7 +76,12 @@ mod tests {
     #[serial]
     fn test_build_with_ignore_case_env_var() {
         env::set_var(IGNORE_CASE, "true");
-        let config = Config::build_from(&["minigrep", "pattern", "file.txt"]).unwrap();
+        let args = vec![
+            "minigrep".to_string(),
+            "pattern".to_string(),
+            "file.txt".to_string(),
+        ];
+        let config = Config::build_from(args.into_iter()).unwrap();
         assert!(config.ignore_case);
         clear_env_var();
     }
@@ -80,7 +90,12 @@ mod tests {
     #[serial]
     fn test_build_without_ignore_case() {
         clear_env_var();
-        let config = Config::build_from(&["minigrep", "pattern", "file.txt"]).unwrap();
+        let args = vec![
+            "minigrep".to_string(),
+            "pattern".to_string(),
+            "file.txt".to_string(),
+        ];
+        let config = Config::build_from(args.into_iter()).unwrap();
         assert!(!config.ignore_case);
     }
 }
